@@ -1,0 +1,45 @@
+{%extends 'sidebar.html'%}
+{%load static%}
+
+{%block body%}
+
+<nav class="navbar">
+    <div class="container">
+        <div class="leftnav">
+            <h3>Welcome Back,</h3>
+        </div>
+
+        <div class="rightnav">
+            <div class="ticket"></div>
+            <div class="notification">
+
+            </div> 
+
+            <div class="self">
+                <h3>Welcome,</h3>
+            </div>
+
+        </div>
+    </div>
+</nav>
+
+
+
+
+    <div class="interviewMain">
+        
+        <div class="interviewCardContainer">
+
+            {%for interview in interviews%}
+                <a href="{%url 'student:wdcontent'%}">
+                    <div class="interviewCard">
+                        <img src="{{interview.img}}" alt="" width="60px" height="60px" style="border-radius: 50%;">
+                        <h3>{{interview.name}}</h3>
+                    </div>
+                </a>
+            {%endfor%}
+        </div>
+        
+    </div>
+
+{%endblock%}

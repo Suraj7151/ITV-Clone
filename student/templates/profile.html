@@ -1,0 +1,169 @@
+{%extends 'sidebar.html'%}
+{%load static%}
+
+{%block body%}
+{%if user.is_authenticated%}
+<nav class="navbar">
+    <div class="container">
+        <div class="leftnav">
+         <h3>Welcome Back,<span><p>{{user}}</p></span> </h3>
+        </div>
+
+        <div class="rightnav">
+            <div class="ticket"></div>
+            <div class="notification">
+
+            </div> 
+
+            <div class="self">
+                <h3>Welcome,</h3>
+            </div>
+
+        </div>
+    </div>
+</nav>
+{%endif%}
+
+    <div class="profileMain">
+        <div class="studentMain">
+            <div class="studentDetail">
+                <div class="student1">
+                    <div class="studentProfileProgress">
+                        <div class="studentimg">
+                            <img src="{%static 'image/raaj.png'%}" alt="" width="80px" height="80px" style="border-radius: 50%; border: 5px solid #B0CB1F;">
+                        </div>
+                        <div class="">
+                            <div class="profileProgressScore">
+                                <h4>100%</h4>
+                                <h3>Profile Complete</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student2">
+                    <div class="studentProfileDetail">
+                        <div class="studentTitle">
+                            <h1>Suraj Yadav</h1>
+                            <div class="studentInfo">
+                                <div>
+                                  
+                                        <img src="https://wingz.itvedant.com/images/profile/degree.svg" alt="">
+                                        <p>Master In Full Stack Web Development with AWS</p>
+        
+                                    
+                                    
+                                        <img src="https://wingz.itvedant.com/images/profile/map.svg" alt="">
+                                        <p>Thane</p>
+                                    
+                                </div>
+        
+                                <ul>
+                                    <li>
+                                        <img src="https://wingz.itvedant.com/images/profile/degree.svg" alt="">
+                                        <p>Master In Full Stack Web Development with AWS</p>
+        
+                                    </li>
+                                    <li>
+                                        <img src="https://wingz.itvedant.com/images/profile/map.svg" alt="">
+                                        <p>Thane</p>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="student3"></div>
+            </div>
+        </div>
+    
+    
+    
+        {%if user.is_authenticated%}
+        <div class="formContainer">
+            <div class="personal-details">
+                <div class="personalHeading">
+                    <h2>Personal Details</h2>
+                </div>
+    
+                <div class="Container">
+                    <form action="" method="POST">
+                        {%csrf_token%}
+                        <div class="profileform">
+                            <div class="inputLabel1">
+                                <label for="" >First Name*</label>
+                                <br>
+                                <input type="text" name="firstname" id="" class="inp1" value="{{profile.firstname}}">
+                            </div>
+    
+                            <div class="inputLabel1">
+                                <label for="" >Middle Name*</label><br>
+                                <input type="text" name="middlename" id="" class="inp1">
+                            </div>
+    
+                            <div class="inputLabel1">
+                                <label for="" >Last Name*</label><br>
+                                <input type="text" name="lastname" id="" class="inp1">
+                            </div>
+    
+                            <div class="inputLabel1">
+                                <label for="" >Email*</label><br>
+                                <input type="text" name="myemail" id="" class="inp1">
+                            </div>
+    
+                            <div class="inputLabel1">
+                                <label for="" >Mobile*</label><br>
+                                <input type="text" name="mobile" id="" class="inp1">
+                            </div>
+    
+                            <div class="inputLabel1 flex">
+                                <div class="inputLabel2">
+                                    <label for="">Date of Birth*</label><br>
+                                    <input type="date" name="dob" class="inp2">
+                                </div>
+    
+                                <div class="inputLabel2">
+                                    <label for="">Gender*</label><br>
+                                    <select name="gender" id="" class="inp2">
+                                        <option value="">Gender</option>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+    
+    
+                        <div class="address">
+                            <label for="">Address*</label><br>
+                            <textarea name="address" id="" cols="145" rows="3"></textarea>
+                        </div>
+    
+                        <div class="emergencyForm">
+                            <h2>Emergency Contact</h2>
+                        <div class="emergency">
+                           
+                            <div class="emergencyDetail">
+                                <label for="">Guardian/Father's Name</label><br>
+                                <input type="text" name="guardian" class="inp3">
+                                
+                            </div>
+    
+                            <div class="emergencyDetail">
+                                <label for="">Emergency Contact</label><br>
+                                <input type="text" name="contact" class="inp3">
+                                
+                            </div>
+                        </div>
+                
+                        </div>
+    
+                        <input type="submit" class="savebtn" value="Save & Next"></input>
+                    </form>
+    
+                    
+                </div>
+            </div>
+        </div>
+        {%endif%}
+    </div>
+{%endblock%}

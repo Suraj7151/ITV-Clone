@@ -1,0 +1,63 @@
+{%extends 'sidebar.html'%}
+{%load static%}
+
+{%block body%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+</head>
+<body style="margin-top: 10rem;">
+
+    <nav class="navbar">
+        <div class="container">
+            <div class="leftnav">
+                <h3>Welcome Back, <span>{{user}}</span> </h3>
+            </div>
+
+            <div class="rightnav">
+                <div class="ticket"></div>
+                <div class="notification">
+
+                </div> 
+
+                <div class="self">
+                    <h3>Welcome, <span>{{user}}</span></h3>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+   <div class="questMain">
+    <div class="" style="margin-left: 5rem;">
+        <form action="{%url 'student:intSearch'%}" method="POST">
+            {%csrf_token%}
+            <input type="text" name="src" class="search">
+          <input type="submit" value="search" class="">
+        </form>
+    </div>
+
+    {%for i in f%}
+    <div class="faq-container">
+        <div class="faq-item">
+            <button class="faq-question" onclick="toggleAnswer(this)">
+                {{i.ques}}
+            </button>
+            <div class="faq-answer">
+                {{i.ans}}
+            </div>
+        </div>
+        <!-- Add more FAQ items as needed -->
+    </div>
+    {%endfor%}
+   </div>    
+   
+    
+    <script src="{%static 'js/script.js'%}"></script>
+</body>
+</html>
+{%endblock%}

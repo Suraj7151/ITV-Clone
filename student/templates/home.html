@@ -1,0 +1,150 @@
+{%extends 'sidebar.html'%}
+{%load static%}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+{%block body%}
+<link rel="stylesheet" href="{%static 'css/style.css'%}">   
+    {%if user.is_authenticated%}
+    <nav class="navbar">
+        <div class="container">
+            <div class="leftnav">
+                <h3>Welcome Back,<span><p style="">{{user}}</p></span> </h3>
+            </div>
+
+            <div class="rightnav">
+                <div class="ticket"></div>
+                <div class="notification">
+
+                </div> 
+
+                <div class="self">
+                    <h3>Welcome, <span>{{profile_data.firstname}}</span></h3>
+                </div>
+
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="maincontainer">
+        <div class="mainbanner">
+            <div class="banner">
+            </div>
+            
+        </div>
+    <div class="progress">
+          <div class="studentscore">
+            <div class="icons">
+                <img src="https://wingz.itvedant.com/images/journey-icons/fly.svg" alt="">
+            </div>
+            <div class="content">
+                <h3>10.51
+                    <span>/ 20</span>
+                </h3>
+                
+
+                <p>Assessment Score</p>
+            </div>
+          </div> 
+
+          <div class="studentscore">
+            <div class="icons">
+                <img src="https://wingz.itvedant.com/images/journey-icons/fly.svg" alt="">
+            </div>
+            <div class="content">
+                <h3>May 30,2024</h3>
+                <p>Your CCE Date</p>
+            </div>
+          </div> 
+
+          <div class="studentscore">
+            <div class="icons">
+                <img src="https://wingz.itvedant.com/images/journey-icons/calender.svg" alt="">
+            </div>
+            <div class="content">
+                <h3>1
+                    <span>/ 62</span>
+                </h3>
+                
+                <p>Lecture Missed</p>
+            </div>
+          </div> 
+    </div>
+   
+
+
+
+            <h3 class="moduleHeading"><a href="">My Modules</a></h3>
+        <div class="moduleContainer">
+           {%for module in modules%} 
+            <div class="module">
+                <div class="modulecontents">
+                    <div class="moduleicon">
+                        <img src="{{module.image}}" alt="" height="50px" width="50px" style="border-radius: 50%;">
+                    </div>
+                    <div class="modulename">
+                        <h3>{{module.name}}</h3>
+                    </div>
+
+                    <div class="moduleprogress">
+                        {{module.progress}}%
+                    </div>
+
+                    <div class="progressbar">
+
+                    </div>
+
+                    <div class="modulestatus">
+                        {{module.status}}
+                    </div>
+
+                    <a href="{%url 'student:sqlContent'%}"><button class="btn btn-primary">Continue Learning</button></a>
+                </div>
+            </div>
+            {%endfor%}
+        </div>
+
+
+
+        <h3 class="moduleHeading"><a href="">Job Openings</a></h3>
+        <div class="moduleContainer openingContainer" >
+           {%for opening in openings%} 
+            <div class="opening">
+                <div class="openingContents">
+                    <div class="jobTitle">
+                        <h4>{{opening.role}}</h4>
+                    </div>
+
+                    <div class="openingData">
+                        <p class="data">Salary : {{opening.salary}}</p> <br>
+                        <p class="data">Location : {{opening.location}}</p>
+                    </div>
+
+                    <div class="company">
+                        <div class="companyicon"></div>
+
+                        <div class="companytitle">
+                            <h1>Company Name</h1>
+                            <p>{{opening.company_name}}</p>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary">Read More</button>
+                </div>
+                
+            </div>
+            {%endfor%}
+        </div>
+    </div>
+    {%endif%}
+
+    
+
+
+    <!-- {%for topic in topics%}
+        {{topic.name}}
+        {%for subtopic in subtopics%}
+        {{subtopic.name}}
+        {%endfor%}
+    {%endfor%} -->
+            
+{%endblock%}

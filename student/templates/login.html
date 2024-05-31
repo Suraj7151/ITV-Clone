@@ -1,0 +1,62 @@
+{%load static%}
+{%block body%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+</head>
+<body class="body">
+
+    <div class="logoImage">
+        <img src="{%static 'image/itvedant_logo.svg'%}" alt="">
+    </div>
+
+    <div class="flyLogo">
+        <img src="{%static 'image/butterfly-border.png'%}" alt="" width="70%">
+    </div>
+
+    <div class="flyLogo2">
+        <img src="{%static 'image/butterfly-border.png'%}" alt="" width="60%">
+    </div>
+
+    <div class="flyLogo3">
+        <img src="{%static 'image/butterfly-border.png'%}" alt="" width="70%">
+    </div>
+    <div class="loginForm">
+        <form action="" method="post" class='loginFormMain'>
+            {%csrf_token%}
+            <div class="loginHeading">
+                <h2>Login</h2>
+                <p>to decode your dreams</p>
+            </div>
+            <table>
+                <p>
+        {% comment %} <label for="id_username">Username:</label> {% endcomment %}
+        <input type="email" class="loginInput" name="username" maxlength="60" required id="id_username" placeholder="Email or Mobile Number">
+        
+        
+      </p>
+    
+      
+      <p>
+        {% comment %} <label for="id_password">Password:</label> {% endcomment %}
+        <input type="password" name="password" class="loginInput" maxlength="30" required id="id_password" placeholder="Password">
+        
+        
+          
+        
+      </p>
+                <tr>
+                    <td>
+                        <input type="submit" value="Login" class='btn loginbtn'>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
+{%endblock%}

@@ -1,34 +1,65 @@
 {%extends 'sidebar.html'%}
 {%load static%}
-
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
 {%block body%}
-<link rel="stylesheet" href="{%static 'css/style.css'%}">   
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/x-icon" href="{% static 'image/favicon.ico' %}">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">  
+    
+</head>
+<body>
     {%if user.is_authenticated%}
-    <nav class="navbar">
-        <div class="container">
-            <div class="leftnav">
-                <h3>Welcome Back,<span><p style="">{{user}}</p></span> </h3>
-            </div>
+    
+    {%include 'navbar.html'%}
 
-            <div class="rightnav">
-                <div class="ticket"></div>
-                <div class="notification">
+    
 
-                </div> 
-
-                <div class="self">
-                    <h3>Welcome, <span>{{profile_data.firstname}}</span></h3>
-                </div>
-
-            </div>
+    <div class="maincontainer" id="MC">
+        <div class="success" style="color: green;">
+            {%include 'messages.html'%}
         </div>
-    </nav>
-
-
-    <div class="maincontainer">
         <div class="mainbanner">
             <div class="banner">
+                <div class="bannerDetails">
+                    <!-- <img src="https://wingz.itvedant.com/images/index/student-journey.svg/" alt=""> -->
+                    <p>Hii {{profile.firstname}}, Your progress so far.</p>
+                    <p class="enroll">You have Enrolled for <strong>Master in Full Stack Web Development with AWS</strong> under <strong>Job Guarantee Program</strong></p>
+                </div>
+                <div class="studentJourney">
+                    {% comment %} <img src="https://wingz.itvedant.com/images/journey-icons/Butterfly-animation.gif" alt="Butterfly" class="butterfly"> {% endcomment %}
+                    <div>
+                        <img src="https://wingz.itvedant.com/images/journey-icons/Butterfly-animation.gif" alt="Butterfly" class="butterfly">
+                    </div>
+                    <div class="step0">
+                        
+                        <span>Start</span>
+                    </div>
+                    
+                    <div class="step1">
+
+                        <span>Foundation with SQL(2...</span>
+                    </div>
+
+                    <div class="step2">
+                        <span>Web Designing Essentia..</span>
+                    </div>
+
+                    <div class="step3">
+                        <span>Python Essential(2022..</span>
+                    </div>
+
+                    <div class="step4">
+                        <span>AWS Cloud Practicione..</span>
+                    </div>
+
+                    <div class="step5">
+                        <span>Web Designing Proffesional</span>
+                    </div>
+                </div>
             </div>
             
         </div>
@@ -38,9 +69,9 @@
                 <img src="https://wingz.itvedant.com/images/journey-icons/fly.svg" alt="">
             </div>
             <div class="content">
-                <h3>10.51
+                <h4>10.51
                     <span>/ 20</span>
-                </h3>
+                </h4>
                 
 
                 <p>Assessment Score</p>
@@ -52,7 +83,7 @@
                 <img src="https://wingz.itvedant.com/images/journey-icons/fly.svg" alt="">
             </div>
             <div class="content">
-                <h3>May 30,2024</h3>
+                <h4>May 30,2024</h4>
                 <p>Your CCE Date</p>
             </div>
           </div> 
@@ -62,9 +93,9 @@
                 <img src="https://wingz.itvedant.com/images/journey-icons/calender.svg" alt="">
             </div>
             <div class="content">
-                <h3>1
+                <h4>1
                     <span>/ 62</span>
-                </h3>
+                </h4>
                 
                 <p>Lecture Missed</p>
             </div>
@@ -76,7 +107,8 @@
 
             <h3 class="moduleHeading"><a href="">My Modules</a></h3>
         <div class="moduleContainer">
-           {%for module in modules%} 
+           {% comment %} {%for module in modules%} {% endcomment %}
+           {% for module, progress in module_progress.items %} 
             <div class="module">
                 <div class="modulecontents">
                     <div class="moduleicon">
@@ -86,19 +118,23 @@
                         <h3>{{module.name}}</h3>
                     </div>
 
-                    <div class="moduleprogress">
-                        {{module.progress}}%
+                    <div class="moduleprogress module-progress" data-progress="{{ progress }}">
+                        {{progress|floatformat:0}}%
                     </div>
 
-                    <div class="progressbar">
+                    <!-- {% comment %} <div class="progressbar">
 
-                    </div>
+                    </div> {% endcomment %} -->
 
                     <div class="modulestatus">
-                        {{module.status}}
+                        {% if progress == 100 %}
+                    Completed
+                {% else %}
+                    Digital Learning Progress
+                {% endif %}
                     </div>
 
-                    <a href="{%url 'student:sqlContent'%}"><button class="btn btn-primary">Continue Learning</button></a>
+                    <a href="{%url 'student:sqlContent' module.id%}"><button class="mybtn btn-primary">Continue Learning</button></a>
                 </div>
             </div>
             {%endfor%}
@@ -128,7 +164,7 @@
                             <p>{{opening.company_name}}</p>
                         </div>
                     </div>
-                    <button class="btn btn-primary">Read More</button>
+                    <button class="mybtn btn-primary"><a href="{%url 'student:openingDetail' opening.id%}">Read More</a></button>
                 </div>
                 
             </div>
@@ -146,5 +182,11 @@
         {{subtopic.name}}
         {%endfor%}
     {%endfor%} -->
+    </script>
+    <!-- <script src="{%static 'js/script.js'%}"></script> -->
+    <script src="https://kit.fontawesome.com/2ae2e29bb9.js" crossorigin="anonymous"></script>
+</body>
+</html> 
+
             
 {%endblock%}

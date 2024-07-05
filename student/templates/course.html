@@ -1,0 +1,119 @@
+{%extends 'sidebar.html'%}
+{%load static%}
+{%block body%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Cards</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    .rside{
+    width: 150px;
+    height: 100%;
+    background-color: aquamarine;
+    position: fixed;
+    top: 0;
+    right: 0;
+    }
+.rside h3{
+    margin: 10px;
+    padding: 10px;}
+
+.sortBtn{
+    padding: 0.5rem 1rem;
+    background-color: #B0CB1F;
+    border: none;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.sortBtn a{
+    text-decoration: none;
+    color: white;
+    font-size: 0.8rem;
+    
+}
+</style>
+
+<body class="course-body">
+    {%if user.is_authenticated%}
+    {%include 'navbar.html'%}
+
+
+    <div class="cart">
+        <a style="color: #B0CB1F;" href="{%url 'student:cartlist' %}"><i class="bi bi-cart">{{ cl}}</i></a>
+    </div>
+
+    <div class="">
+        <h2>Sort</h2>
+        <button class="sortBtn"><a href="{%url 'student:course' %}">All</a></button>
+        {%for i in courseSort%}
+        <button class="sortBtn"><a href="{%url 'student:sort' i%}">{{i}}</a></button>
+        {%endfor%}
+        </div>
+    <div class="course-card-container">
+        {%for course in courses%}
+        <div class="course-card">
+            <img src="{{course.image}}" alt="Data Science With Generative AI Course" height="20rem">
+            <div class="course-info">
+                <h2>{{course.name}}</h2>
+                <p>{{course.details}}</p>
+                <div class="position">
+                    <div class="registration-status">
+                        <span>Registrations Started</span>
+                        <span class="start-date">Starts on {{course.date}}</span>
+                    </div>
+                    <div class="actions">
+                        <button data-course={{course.id}} data-action="add"  class="explore-btn update-cart">Explore</button>
+                        <a href="{%url 'student:addcart' course.id %}"><button class="buy-btn">Add to Cart</button></a>
+                        </div>
+                </div>
+                </div>
+        </div>
+        {%endfor%}
+    
+        <!-- <div class="course-card">
+            <div class="badge">Bestseller</div>
+            <img src="banking-financial-image.jpg" alt="Post Graduate Certification in Banking, Financial Services & Insurance">
+            <div class="course-info">
+                <h2>Post Graduate Certification in Banking, Financial Services & Insurance</h2>
+                <p>Program for individuals who wish to kickstart their career in the Private Banking Industry.</p>
+                <div class="registration-status">
+                    <span>₹ 25000 <del>40000</del></span>
+                    <span class="start-date">Starts on 10 Jun 2024</span>
+                </div>
+                <div class="actions">
+                    <button class="explore-btn">Explore</button>
+                    <button class="register-btn">Register Now</button>
+                </div>
+            </div>
+        </div>
+    
+        <div class="course-card">
+            <div class="badge popular">Popular</div>
+            <img src="full-stack-image.jpg" alt="Full Stack Development Course">
+            <div class="course-info">
+                <h2>Full Stack Development Course</h2>
+                <p>Job Assistance | Gain Full Stack Development Expertise</p>
+                <div class="registration-status">
+                    <span>Registrations Started</span>
+                    <span class="start-date">Starts on 14 Jun 2024</span>
+                </div>
+                <div class="actions">
+                    <button class="explore-btn">Explore</button>
+                    <button class="buy-btn">Buy Now</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    
+    <script src="{%static 'js/cart.js'%}">
+
+    </script>
+    {%endif%}
+</body>
+</html>
+{%endblock%}

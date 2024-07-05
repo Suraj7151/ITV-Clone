@@ -1,0 +1,43 @@
+{%extends 'sidebar.html'%} {%load static%} {%block body%} 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{material.title}}</title>
+
+    <link rel="stylesheet" href="{%static 'css/style.css'%}" />
+    {% comment %}
+    <script src="{% static 'tinymce/tinymce.min.js' %}"></script>
+    {% endcomment %}
+    <script src="{% static 'tinymce/tinymce_init.js' %}"></script>
+    <script
+      src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js"
+      referrerpolicy="origin"
+    ></script>
+  </head>
+  <body>
+    {%if user.is_authenticated%}
+    {%include 'navbar.html'%}
+    <div class="sqlcontent1">
+      <h2 id="material-title">{{ material.title|safe }}</h2>
+      <div id="material-content">{{ material.content|safe}}</div>
+      <div>
+        {% if next_material %}
+        <a
+          href="{% url 'student:study_material' next_material.id %}"
+          class="nextBtn"
+          >Next >></a
+        >
+        {% else %}
+        <form method="post">
+            {% csrf_token %}
+            <input class="lastBtn" type="submit" value="Next >>">
+        </form>
+         {% endif %} 
+      </div>
+    </div>
+    {%endif%}
+  </body>
+</html>
+{%endblock%}

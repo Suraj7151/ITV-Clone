@@ -1,0 +1,44 @@
+{%if user.is_authenticated%}
+<nav class="mynavbar">
+    <div class="container">
+        
+        <div class="leftnav">
+            <div>
+                <i class="fa-solid fa-bars" id="bars" ></i>
+            </div>
+            <p>Welcome Back,</p>
+            <p ><strong>{{profile.firstname}}</strong></p>
+        </div>
+
+        <div class="rightnav">
+            <div class="ticket"></div>
+            <div class="notification">
+
+            </div> 
+
+            <div class="self">
+                <a href="" id="selfToggle" class="dropdown-toggle d-flex  self">
+                    <img src="{{profile.img.url}}" alt="" class="common-profile selfImg" width="50px" height="50px">
+                    <p class="student-name">
+                        <!-- Profile -->
+                        <!-- <sup class="new-badge float-right">New</sup>  -->
+                        <span class="flex">
+                            Welcome, {{profile.firstname}}!
+                            <i class="fa-solid fa-caret-down"></i>
+                        </span>
+                    </p>
+                </a>
+            </div>
+
+            <div class="profileToggle" id="profileId">
+                <ul>
+                    <li><a href="{%url 'student:profile'%}">My Profile</a></li>
+                    <li><a href="{%url 'student:logout'%}">Logout</a></li>
+                    
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>
+<script src="https://kit.fontawesome.com/2ae2e29bb9.js" crossorigin="anonymous"></script>
+{%endif%}

@@ -1,0 +1,110 @@
+{%extends 'sidebar.html'%}
+{%block body%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        .newsSearch{
+            position: relative;
+            left: 5rem;
+            top: -5rem;
+        }
+        .newSearch{
+            display: flex;
+        }.mic2{
+            height: 2rem;
+            width: 2rem;
+            position: relative;
+            left: 6rem;
+            top: 10rem;
+            border-radius: 50%;
+        }
+        .search::placeholder{
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    {%if user.is_authenticated%}
+    {%include 'navbar.html'%}
+    <h2 style="position: relative; top: 5rem; left: 3rem;">Latest Tech News</h2>
+    <div class="newSearch">
+        <form class="newsSearch" action="{%url 'student:news'%}" method="get" style="margin-top: 15rem;">
+            <input type="text" name="q" class="search" id="searchInput2" placeholder="Enter or click on mic button to speak anything to search">
+            
+            <input class="lastBtn" type="submit" value="search">
+            
+    
+        
+        </form>
+        <button class="mic2" onclick="startRecognition()">🎤</button>
+    </div>
+    
+    <div class="newsContainer">
+        
+            {% for i in articles %}
+        <div class="newsCard">
+            <img src="{{ i.urlToImage }}" class="card-img-top" alt="..." width="100%" height="38%">
+            <div class="card-body">
+                <p class="card-text">{{ i.author }}</p>
+                <h5 class="card-title">{{ i.title }}</h5>
+                <!-- <p class="card-title">{{ i.source.name}}</p> -->
+                <p class="card-text">{{ i.description }}</p>
+                <hr>
+                
+            </div>
+            <div class="publish">
+                <small>Published At: {{ i.publishedAt }}</small>
+            <a href="{{ i.url }}" class="see" target="_blank">See News</a>
+            </div>
+        </div>
+        {% endfor %}
+        
+        I
+        </div>
+        {%endif%}
+    </body>
+</html>
+
+<!-- <script>
+    function startRecognition() {
+        fetch("{% url 'student:recognize_speech' %}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('searchInput2').value = data.query;
+            })
+            .catch(error => console.error('Error:', error));
+    }
+</script> -->
+
+<script>
+    function startRecognition() {
+
+        // speak("Hello, how can I assist you today?");
+
+
+        fetch("{% url 'student:recognize_speech' %}")
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('searchInput2').value = data.query;
+                // speak(`Hello ${data.first_name}, how can I assist you today?`);
+                speak(data.query);
+                
+            })
+            .catch(error => console.error('Error:', error));
+    }
+
+    // function speak(text) {
+    //     var msg = new SpeechSynthesisUtterance(text);
+    //     window.speechSynthesis.speak(msg);
+    // }
+
+    // Initial greeting
+    
+</script>
+{%endblock%}

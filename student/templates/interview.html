@@ -2,26 +2,16 @@
 {%load static%}
 
 {%block body%}
-
-<nav class="navbar">
-    <div class="container">
-        <div class="leftnav">
-            <h3>Welcome Back,</h3>
-        </div>
-
-        <div class="rightnav">
-            <div class="ticket"></div>
-            <div class="notification">
-
-            </div> 
-
-            <div class="self">
-                <h3>Welcome,</h3>
-            </div>
-
-        </div>
-    </div>
-</nav>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview Questions</title>
+</head>
+<body>
+    {%if user.is_authenticated%}
+    {%include 'navbar.html'%}
 
 
 
@@ -31,7 +21,7 @@
         <div class="interviewCardContainer">
 
             {%for interview in interviews%}
-                <a href="{%url 'student:wdcontent'%}">
+                <a href="{%url 'student:wdcontent' interview.id%}">
                     <div class="interviewCard">
                         <img src="{{interview.img}}" alt="" width="60px" height="60px" style="border-radius: 50%;">
                         <h3>{{interview.name}}</h3>
@@ -41,5 +31,7 @@
         </div>
         
     </div>
-
+{%endif%}
+</body>
+</html>
 {%endblock%}

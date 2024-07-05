@@ -1,0 +1,49 @@
+{%extends 'sidebar.html'%}
+{%load static%}
+{%block body%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="{%static 'css/style.css'%}">
+    <title>Job Listing</title>
+</head>
+<body class="jobBody">
+    <div class="job-container">
+        <div class="job-header">
+            <div class="company-logo">
+                <img src="logo.png" alt="Company Logo">
+            </div>
+            <div class="job-details">
+                <h1>Technical Content Writer (Curriculum Developer)</h1>
+                <p class="company-name">Itvedant Education Pvt Ltd</p>
+                <p class="location">Thane</p>
+                <p class="salary">₹ 15000 - 25000</p>
+                <p class="vacancies">Vacancies: 2</p>
+            </div>
+            <div class="apply-button">
+                <button>Apply</button>
+            </div>
+        </div>
+        <div class="job-meta">
+            <p class="posted-date">Posted: Yesterday</p>
+            <p class="apply-before">Apply Before: Jul 04, 2024</p>
+        </div>
+        <div class="job-description">
+            <h2>Job Description</h2>
+            <ul>
+                <li><strong>Content Creation:</strong> Develop engaging and informative technical content, including articles, tutorials, and course materials, tailored to the needs of Indian graduates.</li>
+                <li><strong>Coding Expertise:</strong></li>
+            </ul>
+        </div>
+        <div class="company-info">
+            <h2>About Company</h2>
+            <p><a href="https://www.itvedant.com/">https://www.itvedant.com/</a></p>
+            <p>Kerom Building, 4th Floor, Near State Bank of India, Thane West, Thane, Maharashtra, India - 400601</p>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

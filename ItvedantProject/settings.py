@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'student',
+    'tinymce',
 ]
 
 MIDDLEWARE = [
@@ -56,7 +57,7 @@ ROOT_URLCONF = 'ItvedantProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -124,6 +125,7 @@ STATIC_URL = 'static/'
 # STATICFILES_DIRS=[
 #     os.path.join(BASE_DIR, 'static')
 # ]
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 
@@ -132,3 +134,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+RAZORPAY_KEY_ID = 'rzp_test_2BxfpkwhDFo49m'
+RAZORPAY_KEY_SECRET = 'vtqO920aM2XSLWlHIhXScFe6'
+
+LOGIN_URL = '/login/'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_POST = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER ='sooraj7151@gmail.com'
+EMAIL_HOST_PASSWORD ='rdbo wtxr fdmy cvgf'

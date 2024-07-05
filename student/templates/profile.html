@@ -2,129 +2,218 @@
 {%load static%}
 
 {%block body%}
-{%if user.is_authenticated%}
-<nav class="navbar">
-    <div class="container">
-        <div class="leftnav">
-         <h3>Welcome Back,<span><p>{{user}}</p></span> </h3>
-        </div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+</head>
+<style>
+    #file-input {
+    display: none;
+}
 
-        <div class="rightnav">
-            <div class="ticket"></div>
-            <div class="notification">
+.custom-file-upload {
+    display: inline-block;
+    cursor: pointer;
+    color: #007bff;
+    font-size: 24px;
+}
 
-            </div> 
+.custom-file-upload img {
+    font-size: 48px;
+    position: absolute;
+    top: 6rem;
+    left: 7rem;
+}
 
-            <div class="self">
-                <h3>Welcome,</h3>
-            </div>
+.custom-file-upload:hover {
+    color: #0056b3;
+}
+.msgProfile{
+    color: green;
+}
+.upload-container {
+    width: 300px;
+    padding: 10px;
+    /* background-color: #202124; */
+    border-radius: 10px;
+    text-align: center;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    margin-left: 20px;
+}
 
-        </div>
-    </div>
-</nav>
+.upload-container h3 {
+    margin-bottom: 15px;
+}
+
+.upload-box {
+    border: 2px dashed #777;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+}
+
+.upload-box:hover {
+    border-color: #4CAF50;
+}
+
+.upload-box input[type="file"] {
+    display: none;
+}
+
+.upload-box label {
+    color: #4CAF50;
+    cursor: pointer;
+}
+.msgProfilee{
+    color:green;
+    /* border: 1px solid black; */
+    z-index: 1;
+}
+</style>
+<body>
+    {%include 'navbar.html'%}
+    {%if user.is_authenticated%}
+    {% if profile %}
+    {%include 'navbar.html'%}
 {%endif%}
+    
 
     <div class="profileMain">
+        
         <div class="studentMain">
             <div class="studentDetail">
                 <div class="student1">
                     <div class="studentProfileProgress">
                         <div class="studentimg">
-                            <img src="{%static 'image/raaj.png'%}" alt="" width="80px" height="80px" style="border-radius: 50%; border: 5px solid #B0CB1F;">
+                            <img src="{{profile.img}}" alt="" width="80px" height="80px" style="border-radius: 50%; border: 5px solid #B0CB1F;">
+                            
                         </div>
-                        <div class="">
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            {%csrf_token%}
+                        <div id="profileImgInput">
+                            <label for="file-input" class="custom-file-upload">
+                                <img src="https://wingz.itvedant.com/images/profile/edit-profile.svg" alt="">
+                            </label>
+                            <input id="file-input" class="important" type="file" name="img">
+                        </div>
+                        <!-- <div class="">
                             <div class="profileProgressScore">
                                 <h4>100%</h4>
                                 <h3>Profile Complete</h3>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 <div class="student2">
                     <div class="studentProfileDetail">
                         <div class="studentTitle">
-                            <h1>Suraj Yadav</h1>
+                            <h3>{{profile.firstname}} {{profile.lastname}}</h3>
                             <div class="studentInfo">
-                                <div>
+                                <div class="stuAddDetails">
                                   
-                                        <img src="https://wingz.itvedant.com/images/profile/degree.svg" alt="">
-                                        <p>Master In Full Stack Web Development with AWS</p>
+                                    <ul class="studentIconList">
+                                        <li>
+                                            <img src="https://wingz.itvedant.com/images/profile/degree.svg" alt="">
+                                            <p>Master in Full Stack Web Development with AWS</p>
+            
+                                        </li>
+                                        <li>
+                                            <img src="https://wingz.itvedant.com/images/profile/map.svg" alt="">
+                                            <p>Thane</p>
+                                        </li>
+                                    </ul>
+                                    
+                                
         
-                                    
-                                    
-                                        <img src="https://wingz.itvedant.com/images/profile/map.svg" alt="">
-                                        <p>Thane</p>
-                                    
-                                </div>
-        
-                                <ul>
+                                <ul class="studentIconList">
                                     <li>
-                                        <img src="https://wingz.itvedant.com/images/profile/degree.svg" alt="">
-                                        <p>Master In Full Stack Web Development with AWS</p>
+                                        <img src="https://wingz.itvedant.com/images/profile/telephone.svg" alt="">
+                                        <p>{{profile.contact}}</p>
         
                                     </li>
                                     <li>
-                                        <img src="https://wingz.itvedant.com/images/profile/map.svg" alt="">
-                                        <p>Thane</p>
+                                        <img src="https://wingz.itvedant.com/images/profile/mail.svg" alt="">
+                                        <p>{{profile.email}}</p>
                                     </li>
                                 </ul>
+                            </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="student3"></div>
+                <div class="student3">
+                    <!-- <div class="upload-container">
+                        <h3>Updated Resume/CV</h3>
+                        <div class="upload-box">
+                            
+                            <input name="fileUpload" type="file" id="file-upload">
+                            <label for="file-upload">Drag and drop or browse file</label>
+                            <p id="file-name"></p>
+                            
+                        </div> -->
+                        <!-- <label for="">Test</label>
+                            <input name="fileUpload" type="file"> -->
+                    </div>
+                </div>
             </div>
         </div>
     
     
     
-        {%if user.is_authenticated%}
+        <!-- {%if user.is_authenticated%} -->
         <div class="formContainer">
             <div class="personal-details">
                 <div class="personalHeading">
                     <h2>Personal Details</h2>
                 </div>
-    
+                <div class="msgProfilee">
+                    {%include 'messages.html'%}
+                </div>
                 <div class="Container">
-                    <form action="" method="POST">
-                        {%csrf_token%}
+                    
+                    <!-- <form action="" method="POST"> -->
+                        <!-- {%csrf_token%} -->
                         <div class="profileform">
                             <div class="inputLabel1">
                                 <label for="" >First Name*</label>
                                 <br>
-                                <input type="text" name="firstname" id="" class="inp1" value="{{profile.firstname}}">
+                                <input type="text" name="firstname" required id="first" class="inp1 important" value="{{profile.firstname}}">
                             </div>
     
                             <div class="inputLabel1">
-                                <label for="" >Middle Name*</label><br>
-                                <input type="text" name="middlename" id="" class="inp1">
+                                <label for="" >Middle Name</label><br>
+                                <input type="text" name="middlename" id="" class="inp1 important" value={{profile.middlename}}>
                             </div>
     
                             <div class="inputLabel1">
                                 <label for="" >Last Name*</label><br>
-                                <input type="text" name="lastname" id="" class="inp1">
+                                <input type="text" name="lastname" id="last" required class="inp1 important" value={{profile.lastname}}>
                             </div>
     
                             <div class="inputLabel1">
                                 <label for="" >Email*</label><br>
-                                <input type="text" name="myemail" id="" class="inp1">
+                                <input type="text" name="myemail" id="email" required class="inp1 important" value={{profile.email}}>
                             </div>
     
                             <div class="inputLabel1">
                                 <label for="" >Mobile*</label><br>
-                                <input type="text" name="mobile" id="" class="inp1">
+                                <input type="text" name="mobile" required id="mymobile" class="inp1 important" value={{profile.mobile}}>
                             </div>
     
                             <div class="inputLabel1 flex">
                                 <div class="inputLabel2">
-                                    <label for="">Date of Birth*</label><br>
-                                    <input type="date" name="dob" class="inp2">
+                                    <label for="">Date of Birth</label><br>
+                                    <input type="date" name="dob" class="inp2 important" value={{ profile.dob|date:'Y-m-d' }}>
                                 </div>
     
                                 <div class="inputLabel2">
-                                    <label for="">Gender*</label><br>
-                                    <select name="gender" id="" class="inp2">
-                                        <option value="">Gender</option>
+                                    <label for="">Gender</label><br>
+                                    <select name="gender" id="" class="inp2 important" value={{f.gender}}>
+                                        <option value={{profile.gender}}>{{profile.gender}}</option>
                                         <option value="male">Male</option>
                                         <option value="female">Female</option>
                                     </select>
@@ -134,8 +223,8 @@
     
     
                         <div class="address">
-                            <label for="">Address*</label><br>
-                            <textarea name="address" id="" cols="145" rows="3"></textarea>
+                            <label for="">Address</label><br>
+                            <textarea name="address" id="" cols="145" rows="3" >{{profile.address}}</textarea>
                         </div>
     
                         <div class="emergencyForm">
@@ -144,26 +233,60 @@
                            
                             <div class="emergencyDetail">
                                 <label for="">Guardian/Father's Name</label><br>
-                                <input type="text" name="guardian" class="inp3">
+                                <input type="text" name="guardian" class="inp3" value={{profile.guardian}}>
                                 
                             </div>
     
                             <div class="emergencyDetail">
                                 <label for="">Emergency Contact</label><br>
-                                <input type="text" name="contact" class="inp3">
+                                <input type="text" name="contact" class="inp3" value={{profile.contact}}>
                                 
                             </div>
                         </div>
                 
                         </div>
     
-                        <input type="submit" class="savebtn" value="Save & Next"></input>
+                        <input type="submit" class="savebtn" id="Savebtn" value="Save & Next"></input>
                     </form>
+                    {% else %}
+        <p>No profile data available</p>
+        {% endif %}
+                    
     
                     
                 </div>
             </div>
         </div>
-        {%endif%}
+        <!-- {%endif%} -->
     </div>
+
+
+    <script>
+        var btn=document.getElementById('Savebtn')
+        
+        btn.addEventListener('click',function(e){
+            var imp=document.getElementById('first').value
+            if (imp==""){
+                alert("Please fill in the data in the first name fields")
+                console.log("check")
+            }
+            var last=document.getElementById('last').value
+            if (last==""){
+                alert("Please fill in the data in the last name fields")
+                console.log("check")
+            }
+            var email=document.getElementById('email').value
+            if (email==""){
+                alert("Please fill in the data in the email fields")
+                console.log("check")
+            }
+            var mobile=document.getElementById('mymobile').value
+            if (mobile==""){
+                alert("Please fill in the data in the mobile fields")
+                console.log("check")
+            }
+        })
+    </script>
+</body>
+</html>
 {%endblock%}
